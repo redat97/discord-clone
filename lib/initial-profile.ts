@@ -1,7 +1,7 @@
 import { currentUser, redirectToSignIn } from "@clerk/nextjs";
 import { db } from "@/lib/db";
 
-export const initialProfile = async () => {
+export const initialeProfile = async () => {
     const user = await currentUser();
 
     if (!user) {
@@ -12,13 +12,13 @@ export const initialProfile = async () => {
         where: {
             userId: user.id
         }
-    })
+    });
 
-    if (profile){
+    if (profile) {
         return profile;
     }
 
-    const newProfile = await db.profile.create({
+    const newProfile = await db.profile.create( {
         data: {
             userId: user.id,
             name: `${user.firstName} ${user.lastName}`,
